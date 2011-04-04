@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<project basedir="." default="jar">
+    <property name="src" location="."/>
+    <property name="build.classes" location="classes"/>
+    <path id="classpath">
+        <pathelement location="/opt/axis-1_4"/>
+        <pathelement location="/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home/lib/tools.jar"/>
+        <pathelement location="/opt/axis-1_4/lib/activation.jar"/>
+        <pathelement location="/opt/axis-1_4/lib/axis-ant.jar"/>
+        <pathelement location="/opt/axis-1_4/lib/axis.jar"/>
+        <pathelement location="/opt/axis-1_4/lib/commons-discovery-0.2.jar"/>
+        <pathelement location="/opt/axis-1_4/lib/commons-logging-1.0.4.jar"/>
+        <pathelement location="/opt/axis-1_4/lib/jaxrpc.jar"/>
+        <pathelement location="/opt/axis-1_4/lib/log4j-1.2.8.jar"/>
+        <pathelement location="/opt/axis-1_4/lib/mail-1.4.1.jar"/>
+        <pathelement location="/opt/axis-1_4/lib/saaj.jar"/>
+        <pathelement location="/opt/axis-1_4/lib/wsdl4j-1.5.1.jar"/>
+    </path>
+    <target name="compile">
+       <mkdir dir="${build.classes}"/>
+        <javac destdir="${build.classes}" debug="on">
+            <classpath refid="classpath" />
+            <src path="${src}"/>
+        </javac>
+    </target>
+    <target name="jar" depends="compile">
+        <copy todir="${build.classes}">
+            <fileset dir="." casesensitive="yes" >
+                <include name="**/*.wsdd"/>
+            </fileset>
+        </copy>
+        <jar jarfile="sugarcrm-soap-client-bin-1.0.0.jar" basedir="${build.classes}" >
+        <include name="**" />
+        <manifest>
+            <section name="org/apache/ws4j2ee">
+            <attribute name="Implementation-Title" value="Apache Axis"/>
+            <attribute name="Implementation-Vendor" value="Apache Web Services"/>
+            </section>
+        </manifest>
+        </jar>
+        <delete dir="${build.classes}"/>
+    </target>
+</project>
