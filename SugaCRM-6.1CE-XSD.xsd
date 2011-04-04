@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tns="http://www.sugarcrm.com/sugarcrm" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.sugarcrm.com/sugarcrm">
+    <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"
+        schemaLocation="http://schemas.xmlsoap.org/soap/encoding/"/>
+    <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"
+        schemaLocation="http://schemas.xmlsoap.org/wsdl/"/>
+
+    <xsd:complexType name="new_note_attachment">
+        <xsd:all>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="filename" type="xsd:string"/>
+            <xsd:element name="file" type="xsd:string"/>
+            <xsd:element name="related_module_id" type="xsd:string"/>
+            <xsd:element name="related_module_name" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="new_return_note_attachment">
+        <xsd:all>
+            <xsd:element name="note_attachment" type="tns:new_note_attachment"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="user_auth">
+        <xsd:all>
+            <xsd:element name="user_name" type="xsd:string"/>
+            <xsd:element name="password" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="field">
+        <xsd:all>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:element name="label" type="xsd:string"/>
+            <xsd:element name="required" type="xsd:int"/>
+            <xsd:element name="options" type="tns:name_value_list"/>
+            <xsd:element name="default_value" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="field_list">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:field[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="link_field">
+        <xsd:all>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:element name="relationship" type="xsd:string"/>
+            <xsd:element name="module" type="xsd:string"/>
+            <xsd:element name="bean_name" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="link_field_list">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:link_field[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="name_value">
+        <xsd:all>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="value" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="name_value_list">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:name_value[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="name_value_lists">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:name_value_list[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="select_fields">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="deleted_array">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:int[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="new_module_fields">
+        <xsd:all>
+            <xsd:element name="module_name" type="xsd:string"/>
+            <xsd:element name="module_fields" type="tns:field_list"/>
+            <xsd:element name="link_fields" type="tns:link_field_list"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="entry_value">
+        <xsd:all>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="module_name" type="xsd:string"/>
+            <xsd:element name="name_value_list" type="tns:name_value_list"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="entry_list">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:entry_value[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="set_entries_detail_result">
+        <xsd:all>
+            <xsd:element name="name_value_lists" type="tns:name_value_lists"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="link_names_to_fields_array">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType"
+                    wsdl:arrayType="tns:link_name_to_fields_array[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="link_name_to_fields_array">
+        <xsd:all>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="value" type="tns:select_fields"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="link_value">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:name_value[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="link_array_list">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:link_value[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="link_name_value">
+        <xsd:all>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="records" type="tns:link_array_list"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="link_list">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:link_name_value[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="link_lists">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:link_list[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="get_entry_result_version2">
+        <xsd:all>
+            <xsd:element name="entry_list" type="tns:entry_list"/>
+            <xsd:element name="relationship_list" type="tns:link_lists"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="return_search_result">
+        <xsd:all>
+            <xsd:element name="entry_list" type="tns:link_list"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="get_entry_list_result_version2">
+        <xsd:all>
+            <xsd:element name="result_count" type="xsd:int"/>
+            <xsd:element name="next_offset" type="xsd:int"/>
+            <xsd:element name="entry_list" type="tns:entry_list"/>
+            <xsd:element name="relationship_list" type="tns:link_lists"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="get_server_info_result">
+        <xsd:all>
+            <xsd:element name="flavor" type="xsd:string"/>
+            <xsd:element name="version" type="xsd:string"/>
+            <xsd:element name="gmt_time" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="new_set_entry_result">
+        <xsd:all>
+            <xsd:element name="id" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="new_set_entries_result">
+        <xsd:all>
+            <xsd:element name="ids" type="tns:select_fields"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="new_set_relationhip_ids">
+        <xsd:complexContent>
+            <xsd:restriction base="SOAP-ENC:Array">
+                <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:select_fields[]"/>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="new_set_relationship_list_result">
+        <xsd:all>
+            <xsd:element name="created" type="xsd:int"/>
+            <xsd:element name="failed" type="xsd:int"/>
+            <xsd:element name="deleted" type="xsd:int"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="document_revision">
+        <xsd:all>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="document_name" type="xsd:string"/>
+            <xsd:element name="revision" type="xsd:string"/>
+            <xsd:element name="filename" type="xsd:string"/>
+            <xsd:element name="file" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="new_return_document_revision">
+        <xsd:all>
+            <xsd:element name="document_revision" type="tns:document_revision"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="module_list">
+        <xsd:all>
+            <xsd:element name="modules" type="tns:select_fields"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="get_entries_count_result">
+        <xsd:all>
+            <xsd:element name="result_count" type="xsd:int"/>
+        </xsd:all>
+    </xsd:complexType>
+</xsd:schema>
